@@ -15,6 +15,7 @@
     "@angular/platform-server": "~20.1.0",
     "@angular/router": "~20.1.0",
     "@angular/ssr": "~20.1.0",
+    "@apollo/server": "^4.12.2",
     "@nestjs/apollo": "^13.1.0",
     "@nestjs/common": "^11.0.0",
     "@nestjs/config": "^4.0.2",
