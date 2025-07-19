@@ -2,12 +2,12 @@ import { Module } from '@nestjs/common';
 import { ConfigModule } from '@nestjs/config';
 import { GraphQLModule } from '@nestjs/graphql';
 import { ApolloDriver, ApolloDriverConfig } from '@nestjs/apollo';
-import { PrismaService } from './prisma/prisma.service';
 import { HotelModule } from './hotel/hotel.module';
 import { UserModule } from './user/user.module';
 import { CustomerModule } from './customer/customer.module';
 import { BookingModule } from './booking/booking.module';
 import { AuthModule } from './auth/auth.module';
+import { PrismaModule } from './prisma/prisma.module';
 
 @Module({
   imports: [
@@ -23,7 +23,8 @@ import { AuthModule } from './auth/auth.module';
     CustomerModule,
     BookingModule,
     AuthModule,
+    PrismaModule
   ],
-  providers: [PrismaService],
+  providers: [],
 })
 export class AppModule {}

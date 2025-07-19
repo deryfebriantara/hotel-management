@@ -4,6 +4,7 @@ import { CreateHotelInput, UpdateHotelInput } from './hotel.dto';
 import { PrismaService } from '../prisma/prisma.service';
 import { UseGuards } from '@nestjs/common';
 import { JwtAuthGuard } from '../auth/jwt-auth.guard';
+import { Prisma } from 'apps/hotel-management-backend/generated/prisma';
 
 @Resolver(() => Hotel)
 export class HotelResolver {
@@ -15,7 +16,8 @@ export class HotelResolver {
     @Args('sortBy', { nullable: true }) sortBy?: string,
     @Args('sortOrder', { nullable: true, defaultValue: 'asc' }) sortOrder?: 'asc' | 'desc',
   ) {
-    const where = search
+
+    const where: Prisma.HotelWhereInput = search
       ? {
           OR: [
             { name: { contains: search, mode: 'insensitive' } },
@@ -25,13 +27,13 @@ export class HotelResolver {
         }
       : {};
 
-    const orderBy = sortBy
+    const orderBy: Prisma.HotelOrderByWithRelationInput = sortBy
       ? { [sortBy]: sortOrder }
       : { createdAt: 'desc' };
 
     return this.prisma.hotel.findMany({
-      where,
-      orderBy,
+     where,
+     orderBy,
       include: { bookings: true },
     });
   }
