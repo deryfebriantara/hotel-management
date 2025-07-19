@@ -1,0 +1,10 @@
+{
+  "name": "hotel-management-frontend-e2e",
+  "$schema": "../../node_modules/nx/schemas/project-schema.json",
+  "projectType": "application",
+  "sourceRoot": "apps/hotel-management-frontend-e2e/src",
+  "tags": [],
+  "implicitDependencies": ["hotel-management-frontend"],
+  "// targets": "to see all targets run: nx show project hotel-management-frontend-e2e --web",
+  "targets": {}
+}
