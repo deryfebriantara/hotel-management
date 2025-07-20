@@ -1,11 +1,14 @@
-import { Injectable } from '@nestjs/common';
+import { Injectable, UnauthorizedException } from '@nestjs/common';
 import { PrismaService } from '../prisma/prisma.service';
 import { CreateCustomerInput, UpdateCustomerInput } from './customer.dto';
 import * as bcrypt from 'bcrypt';
+import { JwtService } from '@nestjs/jwt';
 
 @Injectable()
 export class CustomerService {
-  constructor(private prisma: PrismaService) {}
+  constructor(
+    private prisma: PrismaService,
+ private jwtService: JwtService,) {}
 
   async createCustomer(input: CreateCustomerInput) {
     const hashedPassword = await bcrypt.hash(input.password, 10);
@@ -47,4 +50,15 @@ export class CustomerService {
       include: { bookings: true },
     });
   }
+
+  async customerLogin(email: string, password: string) {
+      const user = await this.prisma.customer.findUnique({ where: { email } });
+      if (!user || !(await bcrypt.compare(password, user.password))) {
+        throw new UnauthorizedException('Invalid credentials');
+      }
+      const payload = { sub: user.id, email: user.email };
+      return {
+        access_token: this.jwtService.sign(payload),
+      };
+    }
 }

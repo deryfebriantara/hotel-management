@@ -79,6 +79,7 @@ type Mutation {
   deleteHotel(id: Int!): Hotel!
   deleteUser(id: Int!): User!
   login(input: LoginUserInput!): String!
+  loginCustomer(input: LoginUserInput!): String!
   updateCustomer(id: Int!, input: UpdateCustomerInput!): Customer!
   updateHotel(id: Int!, input: UpdateHotelInput!): Hotel!
   updateUser(id: Int!, input: UpdateUserInput!): User!

@@ -17,6 +17,7 @@ import { PrismaModule } from './prisma/prisma.module';
       autoSchemaFile: 'schema.gql',
       sortSchema: true,
       playground: true,
+      context: ({ req }) => ({ req }),
     }),
     HotelModule,
     UserModule,

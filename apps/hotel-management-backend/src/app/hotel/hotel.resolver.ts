@@ -47,7 +47,7 @@ export class HotelResolver {
   }
 
   @Mutation(() => Hotel)
-  @UseGuards(JwtAuthGuard)
+  //@UseGuards(JwtAuthGuard)
   async createHotel(@Args('input') input: CreateHotelInput) {
     return this.prisma.hotel.create({
       data: {
@@ -60,7 +60,7 @@ export class HotelResolver {
   }
 
   @Mutation(() => Hotel)
-  @UseGuards(JwtAuthGuard)
+  //@UseGuards(JwtAuthGuard)
   async updateHotel(
     @Args('id', { type: () => Int }) id: number,
     @Args('input') input: UpdateHotelInput,
@@ -77,7 +77,7 @@ export class HotelResolver {
   }
 
   @Mutation(() => Hotel)
-  @UseGuards(JwtAuthGuard)
+  //@UseGuards(JwtAuthGuard)
   async deleteHotel(@Args('id', { type: () => Int }) id: number) {
     return this.prisma.hotel.delete({
       where: { id },

@@ -2,6 +2,7 @@ import { Resolver, Query, Mutation, Args, Int } from '@nestjs/graphql';
 import { Customer } from './customer.model';
 import { CreateCustomerInput, UpdateCustomerInput } from './customer.dto';
 import { CustomerService } from './customer.service';
+import { LoginUserInput } from '../user/user.dto';
 
 @Resolver(() => Customer)
 export class CustomerResolver {
@@ -34,4 +35,10 @@ export class CustomerResolver {
   async deleteCustomer(@Args('id', { type: () => Int }) id: number) {
     return this.customerService.deleteCustomer(id);
   }
+
+   @Mutation(() => String)
+    async loginCustomer(@Args('input') input: LoginUserInput) {
+      const { access_token } = await this.customerService.customerLogin(input.email, input.password);
+      return access_token;
+    }
 }
