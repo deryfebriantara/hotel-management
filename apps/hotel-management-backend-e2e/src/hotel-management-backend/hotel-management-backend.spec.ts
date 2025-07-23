@@ -1,4 +1,3 @@
-// apps/hotel-management-backend-e2e/src/hotel.e2e-spec.ts
 import axios from 'axios';
 
 describe('GraphQL Hotel CRUD (e2e)', () => {
