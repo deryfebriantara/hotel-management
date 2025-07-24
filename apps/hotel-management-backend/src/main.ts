@@ -14,7 +14,7 @@ async function bootstrap() {
   app.enableCors({
     origin: [
       'http://localhost:4200',   // Angular dev server
-      'https://your-frontend-domain.com', // Production frontend
+      'https://hotel-management-seven-sable.vercel.app',
     ],
     credentials: true,
   })
