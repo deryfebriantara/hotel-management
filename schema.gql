@@ -1,0 +1,122 @@
+# ------------------------------------------------------
+# THIS FILE WAS AUTOMATICALLY GENERATED (DO NOT MODIFY)
+# ------------------------------------------------------
+
+type Booking {
+  checkIn: DateTime!
+  checkOut: DateTime!
+  createdAt: DateTime!
+  customer: Customer!
+  customerId: Int!
+  hotel: Hotel!
+  hotelId: Int!
+  id: Int!
+}
+
+input CreateBookingInput {
+  checkIn: DateTime!
+  checkOut: DateTime!
+  customerId: Int!
+  hotelId: Int!
+}
+
+input CreateCustomerInput {
+  email: String!
+  name: String!
+  password: String!
+}
+
+input CreateHotelInput {
+  description: String
+  image: String
+  location: String!
+  name: String!
+}
+
+input CreateUserInput {
+  email: String!
+  name: String!
+  password: String!
+}
+
+type Customer {
+  bookings: [Booking!]
+  createdAt: DateTime!
+  email: String!
+  id: Int!
+  name: String!
+  updatedAt: DateTime!
+}
+
+"""
+A date-time string at UTC, such as 2019-12-03T09:54:33Z, compliant with the date-time format.
+"""
+scalar DateTime
+
+type Hotel {
+  bookings: [Booking!]
+  createdAt: DateTime!
+  description: String
+  id: Int!
+  image: String
+  location: String!
+  name: String!
+  updatedAt: DateTime!
+}
+
+input LoginUserInput {
+  email: String!
+  password: String!
+}
+
+type Mutation {
+  createBooking(input: CreateBookingInput!): Booking!
+  createCustomer(input: CreateCustomerInput!): Customer!
+  createHotel(input: CreateHotelInput!): Hotel!
+  createUser(input: CreateUserInput!): User!
+  deleteBooking(id: Int!): Booking!
+  deleteCustomer(id: Int!): Customer!
+  deleteHotel(id: Int!): Hotel!
+  deleteUser(id: Int!): User!
+  login(input: LoginUserInput!): String!
+  loginCustomer(input: LoginUserInput!): String!
+  updateCustomer(id: Int!, input: UpdateCustomerInput!): Customer!
+  updateHotel(id: Int!, input: UpdateHotelInput!): Hotel!
+  updateUser(id: Int!, input: UpdateUserInput!): User!
+}
+
+type Query {
+  booking(id: Int!): Booking!
+  bookings: [Booking!]!
+  customer(id: Int!): Customer!
+  customers: [Customer!]!
+  hotel(id: Int!): Hotel!
+  hotels(search: String, sortBy: String, sortOrder: String = "asc"): [Hotel!]!
+  user(id: Int!): User!
+  users: [User!]!
+}
+
+input UpdateCustomerInput {
+  name: String
+  password: String
+}
+
+input UpdateHotelInput {
+  description: String
+  image: String
+  location: String
+  name: String
+}
+
+input UpdateUserInput {
+  name: String
+  password: String
+}
+
+type User {
+  createdAt: DateTime!
+  email: String!
+  id: Int!
+  name: String!
+  updatedAt: DateTime!
+}
