@@ -16,9 +16,7 @@
         },
         "start": {
           "dependsOn": ["build"],
-          "cmds": [
-            "node dist/apps/hotel-management-backend/main.js"
-          ]
+          "cmds": ["node dist/apps/hotel-management-backend/main.js"]
         }
       }
     }
