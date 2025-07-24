@@ -3,20 +3,8 @@
   "build": {
     "nixpacksPlan": {
       "phases": {
-        "install": {
-          "dependsOn": ["setup"],
-          "cmds": ["npm install --legacy-peer-deps"]
-        },
-        "build": {
-          "dependsOn": ["install"],
-          "cmds": [
-            "npx prisma generate --schema=apps/hotel-management-backend/prisma/schema.prisma",
-            "npx nx build hotel-management-backend --configuration=production"
-          ]
-        },
         "start": {
-          "dependsOn": ["build"],
-          "cmds": ["node dist/apps/hotel-management-backend/main.js"]
+          "cmds": ["./entry.sh"]
         }
       }
     }
