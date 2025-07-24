@@ -2,7 +2,9 @@
   "name": "@hotel-management/source",
   "version": "0.0.0",
   "license": "MIT",
-  "scripts": {},
+  "scripts": {
+    "serve:ssr": "node dist/apps/hotel-management-frontend/server/server.mjs"
+  },
   "private": true,
   "dependencies": {
     "@angular-devkit/build-angular": "~20.1.0",
