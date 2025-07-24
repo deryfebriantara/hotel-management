@@ -1,0 +1,19 @@
+{
+    "version": 2,
+    "builds": [
+      {
+        "src": "dist/apps/hotel-management-frontend/server/main.js",
+        "use": "@vercel/node"
+      },
+      {
+        "src": "dist/apps/hotel-management-frontend/browser/**/*",
+        "use": "@vercel/static"
+      }
+    ],
+    "routes": [
+      {
+        "src": "/(.*)",
+        "dest": "dist/apps/hotel-management-frontend/server/main.js"
+      }
+    ]
+  }
