@@ -1,101 +1,177 @@
-# HotelManagement
 
-<a alt="Nx logo" href="https://nx.dev" target="_blank" rel="noreferrer"><img src="https://raw.githubusercontent.com/nrwl/nx/master/images/nx-logo.png" width="45"></a>
+# 🏨 Hotel List 
 
-✨ Your new, shiny [Nx workspace](https://nx.dev) is ready ✨.
+A full-stack hotel listing application that allows users to manage hotel entries — including viewing, searching, sorting, creating, updating, and deleting records.
 
-[Learn more about this workspace setup and its capabilities](https://nx.dev/nx-api/nest?utm_source=nx_project&amp;utm_medium=readme&amp;utm_campaign=nx_projects) or run `npx nx graph` to visually explore what was created. Now, let's get you up to speed!
+## 📌 Objective
 
-## Run tasks
+Build a hotel listing  application using Angular, Node.js with TypeScript, and GraphQL. The app supports full CRUD operations and basic UI/UX requirements.
 
-To run the dev server for your app, use:
+---
 
-```sh
-npx nx serve hotel-management-backend
+## 🛠️ Tech Stack
+
+| Layer       | Technology                  |
+|-------------|-----------------------------|
+| Frontend    | Angular(SSR)                     |
+| Backend     | Node.js + TypeScript        |
+| API         | GraphQL                     |
+| Database    | PostgreSQL (via Prisma ORM) |
+| Hosting     | Railway (Backend), Railway (Frontend) |
+| Versioning  | Git + GitHub                |
+
+---
+
+## 🌐 Live Demo
+
+- **Frontend**: [https://energetic-art-production.up.railway.app/](https://energetic-art-production.up.railway.app/)  
+- **GraphQL API Playground**: [https://hotel-management-production-65dd.up.railway.app/graphql](https://hotel-management-production-65dd.up.railway.app/graphql)
+
+---
+
+## 📦 Features Implemented
+
+✅ View all hotel entries  
+✅ Search hotel list by keyword  
+✅ Sort list by name or date  
+✅ Create new hotel  
+✅ Update hotel info  
+✅ Delete hotel entry  
+✅ Fully persistent storage  
+✅ Fully responsive basic design  
+✅ Deployed frontend and backend  
+✅ GraphQL API with query + mutation
+
+---
+
+## 📁 Project Structure
+
 ```
 
-To create a production bundle:
+apps/
+├── hotel-management-frontend/     # Angular frontend
+└── hotel-management-backend/      # Node.js + GraphQL backend
 
-```sh
-npx nx build hotel-management-backend
+libs/
+└── shared/                        # Shared utilities (if any)
+
+````
+
+---
+
+## 🚀 Getting Started
+
+### 1. Clone the Repository
+
+```bash
+git clone git@github.com:deryfebriantara/hotel-management.git
+cd hotel-management
+````
+
+---
+
+## ▶️ Frontend (Angular) & backend (Nestjs)
+
+### Install & Run
+
+```bash
+
+npm install
+
+nx run-many --target=serve
+
 ```
 
-To see all available targets to run for a project, run:
+### Build for Production
 
-```sh
-npx nx show project hotel-management-backend
+```bash
+npx nx run hotel-management-frontend:build --configuration=production
+npx nx run hotel-management-backend:build --configuration=production
 ```
 
-These targets are either [inferred automatically](https://nx.dev/concepts/inferred-tasks?utm_source=nx_project&utm_medium=readme&utm_campaign=nx_projects) or defined in the `project.json` or `package.json` files.
+---
 
-[More about running tasks in the docs &raquo;](https://nx.dev/features/run-tasks?utm_source=nx_project&utm_medium=readme&utm_campaign=nx_projects)
+### Set Up Prisma (if using PostgreSQL)
 
-## Add new projects
-
-While you could add new projects to your workspace manually, you might want to leverage [Nx plugins](https://nx.dev/concepts/nx-plugins?utm_source=nx_project&utm_medium=readme&utm_campaign=nx_projects) and their [code generation](https://nx.dev/features/generate-code?utm_source=nx_project&utm_medium=readme&utm_campaign=nx_projects) feature.
-
-Use the plugin's generator to create new projects.
-
-To generate a new application, use:
-
-```sh
-npx nx g @nx/nest:app demo
+```bash
+npx prisma generate --schema=apps/hotel-management-backend/prisma/schema.prisma
+npx prisma migrate dev
 ```
 
-To generate a new library, use:
+> If running locally, create a `.env` file with your database URL.
 
-```sh
-npx nx g @nx/node:lib mylib
+
+* GraphQL playground available at: `http://localhost:3000/graphql`
+
+---
+
+## 🧪 How the Task Was Completed
+
+1. **Designed Schema** with `Hotel` model in GraphQL and Prisma.
+2. **Implemented CRUD Resolvers** using Apollo Server and TypeScript.
+3. **Set up PostgreSQL** with Prisma ORM for persistent storage.
+4. **Built Angular frontend** with GraphQL queries/mutations using Apollo Client.
+5. **Added search & sort functionality** in frontend.
+6. **Tested** all features: create, read, update, delete, sort, and search.
+7. **Deployed** backend on Railway and frontend on Vercel.
+8. **Maintained Git best practices** with clean commit history.
+
+---
+
+### 🗃️ Additional Models
+
+The following model(s) also exist in the database schema:
+
+- `User`: Represents admin or hotel manager accounts (not used in frontend)
+- `Booking`: Placeholder for future booking features
+
+These models are not connected to the current UI implementation and were not part of the evaluation requirements, but are included in the backend schema for potential extensibility.
+
+
+## 🧪 GraphQL Overview
+
+### Query Example
+
+```graphql
+query {
+  hotels {
+    id
+    name
+    location
+    description
+    createdAt
+    updatedAt
+  }
+}
 ```
 
-You can use `npx nx list` to get a list of installed plugins. Then, run `npx nx list <plugin-name>` to learn about more specific capabilities of a particular plugin. Alternatively, [install Nx Console](https://nx.dev/getting-started/editor-setup?utm_source=nx_project&utm_medium=readme&utm_campaign=nx_projects) to browse plugins and generators in your IDE.
+### Mutation Example
 
-[Learn more about Nx plugins &raquo;](https://nx.dev/concepts/nx-plugins?utm_source=nx_project&utm_medium=readme&utm_campaign=nx_projects) | [Browse the plugin registry &raquo;](https://nx.dev/plugin-registry?utm_source=nx_project&utm_medium=readme&utm_campaign=nx_projects)
-
-## Set up CI!
-
-### Step 1
-
-To connect to Nx Cloud, run the following command:
-
-```sh
-npx nx connect
+```graphql
+mutation {
+  createHotel(input: {
+    name: "Grand Hotel"
+    location: "Jakarta"
+    description: "5-star urban luxury"
+  }) {
+    id
+    name
+  }
+}
 ```
 
-Connecting to Nx Cloud ensures a [fast and scalable CI](https://nx.dev/ci/intro/why-nx-cloud?utm_source=nx_project&utm_medium=readme&utm_campaign=nx_projects) pipeline. It includes features such as:
+---
 
-- [Remote caching](https://nx.dev/ci/features/remote-cache?utm_source=nx_project&utm_medium=readme&utm_campaign=nx_projects)
-- [Task distribution across multiple machines](https://nx.dev/ci/features/distribute-task-execution?utm_source=nx_project&utm_medium=readme&utm_campaign=nx_projects)
-- [Automated e2e test splitting](https://nx.dev/ci/features/split-e2e-tasks?utm_source=nx_project&utm_medium=readme&utm_campaign=nx_projects)
-- [Task flakiness detection and rerunning](https://nx.dev/ci/features/flaky-tasks?utm_source=nx_project&utm_medium=readme&utm_campaign=nx_projects)
+## 📩 Submission
 
-### Step 2
+* **GitHub Repo**: \[ git@github.com:deryfebriantara/hotel-management.git]
+* **Frontend**: [https://energetic-art-production.up.railway.app/](https://energetic-art-production.up.railway.app/)
+* **Backend GraphQL**: [https://hotel-management-production-65dd.up.railway.app/graphql](https://hotel-management-production-65dd.up.railway.app/graphql)
 
-Use the following command to configure a CI workflow for your workspace:
 
-```sh
-npx nx g ci-workflow
-```
+---
 
-[Learn more about Nx on CI](https://nx.dev/ci/intro/ci-with-nx#ready-get-started-with-your-provider?utm_source=nx_project&utm_medium=readme&utm_campaign=nx_projects)
+## 📄 License
 
-## Install Nx Console
+MIT
 
-Nx Console is an editor extension that enriches your developer experience. It lets you run tasks, generate code, and improves code autocompletion in your IDE. It is available for VSCode and IntelliJ.
-
-[Install Nx Console &raquo;](https://nx.dev/getting-started/editor-setup?utm_source=nx_project&utm_medium=readme&utm_campaign=nx_projects)
-
-## Useful links
-
-Learn more:
-
-- [Learn more about this workspace setup](https://nx.dev/nx-api/nest?utm_source=nx_project&amp;utm_medium=readme&amp;utm_campaign=nx_projects)
-- [Learn about Nx on CI](https://nx.dev/ci/intro/ci-with-nx?utm_source=nx_project&utm_medium=readme&utm_campaign=nx_projects)
-- [Releasing Packages with Nx release](https://nx.dev/features/manage-releases?utm_source=nx_project&utm_medium=readme&utm_campaign=nx_projects)
-- [What are Nx plugins?](https://nx.dev/concepts/nx-plugins?utm_source=nx_project&utm_medium=readme&utm_campaign=nx_projects)
-
-And join the Nx community:
-- [Discord](https://go.nx.dev/community)
-- [Follow us on X](https://twitter.com/nxdevtools) or [LinkedIn](https://www.linkedin.com/company/nrwl)
-- [Our Youtube channel](https://www.youtube.com/@nxdevtools)
-- [Our blog](https://nx.dev/blog?utm_source=nx_project&utm_medium=readme&utm_campaign=nx_projects)

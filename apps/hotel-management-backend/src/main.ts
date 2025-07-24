@@ -14,7 +14,7 @@ async function bootstrap() {
   app.enableCors({
     origin: [
       'http://localhost:4200',   // Angular dev server
-      'https://energetic-art-production.up.railway.app/', // Production frontend
+      'https://energetic-art-production.up.railway.app', // Production frontend
     ],
     credentials: true,
   })
