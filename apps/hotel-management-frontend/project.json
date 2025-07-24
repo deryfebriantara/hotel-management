@@ -32,9 +32,8 @@
             "replace": "apps/hotel-management-frontend/src/environments/environment.ts",
             "with": "apps/hotel-management-frontend/src/environments/environment.prod.ts"
           }
-         ]
+        ]
       },
-     
       "configurations": {
         "production": {
           "budgets": [
