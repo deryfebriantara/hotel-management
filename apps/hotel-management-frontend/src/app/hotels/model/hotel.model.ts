@@ -1,10 +1,14 @@
 export interface Hotel {
-    id: string;
-    name: string;
-    location: string;
-    description?: string;
-    createdAt: string;
-    updatedAt: string;
-  }
-  export type HotelInput = Omit<Hotel, 'id' | 'createdAt' | 'updatedAt'>;
-  
+  id: number;
+  name: string;
+  location: string;
+  description?: string;
+  createdAt?: string; // ISO date string
+  updatedAt?: string; // ISO date string
+}
+
+export interface HotelInput {
+  name: string;
+  location: string;
+  description?: string;
+}

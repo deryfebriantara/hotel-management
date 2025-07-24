@@ -18,6 +18,8 @@ import { PrismaModule } from './prisma/prisma.module';
       sortSchema: true,
       playground: true,
       context: ({ req }) => ({ req }),
+      
+      
     }),
     HotelModule,
     UserModule,
